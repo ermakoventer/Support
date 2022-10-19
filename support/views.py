@@ -32,10 +32,13 @@ class SupportAPIViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)
 
     def update(self, request, *args, **kwargs):
-        """Переопределяем метод update, и когда статус меняется на Resolved
-        отправляем сообщение на почту"""
+        """override method update, when status is changed to Resolved,
+        send message to mail"""
         response = super(SupportAPIViewSet, self).update(request, *args, **kwargs)
-        user = Message.objects.get(pk=self.kwargs['pk'])
-        if user.status == "Resolved":
-            send_status_message.delay(user.sender.profile.email)
+        user = Message.objects.get(pk=self.kwargs.get('pk'))
+        if user.status == 'Resolved':
+            """ I changed "status" field on TextChoices, but I don't know
+            how to realize this method correctly
+            """
+            send_status_message.delay(user.sender.email)
         return Response(status=201)
