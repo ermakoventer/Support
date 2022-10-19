@@ -9,12 +9,10 @@ class MessageSerializer(serializers.ModelSerializer):
         model = Message
         fields = "__all__"
 
-    def get_fields(self):
-        fields = super().get_fields()
-        for field in fields:
-            fields['answer_support'].read_only = True
-            fields['status'].read_only = True
-        return fields
+        extra_kwargs = {
+            'answer_support': {'read_only': True},
+            'status': {'read_only': True}
+        }
 
 
 class SupportSerializer(serializers.ModelSerializer):
@@ -24,9 +22,7 @@ class SupportSerializer(serializers.ModelSerializer):
         model = Message
         fields = "__all__"
 
-    def get_fields(self, *args, **kwargs):
-        fields = super().get_fields(*args, **kwargs)
-        for field in fields:
-            fields['title'].read_only = True
-            fields['content'].read_only = True
-        return fields
+        extra_kwargs = {
+            'title': {'read_only': True},
+            'content': {'read_only': True}
+        }
