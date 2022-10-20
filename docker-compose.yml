@@ -19,7 +19,7 @@ services:
             - redis
     celery:
         build: .
-        command: celery -A config worker -l info --pool=solo
+        command: poetry run celery -A config worker -l info --pool=solo
         environment:
             - DEBUG=$DEBUG
             - DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS

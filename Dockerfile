@@ -1,13 +1,25 @@
+#FROM python:3.10
+#
+#ENV PYTHONUNBUFFERED=1
+#
+#WORKDIR /usr/src/app
+#
+#COPY requirements.txt ./
+#
+#RUN pip install --upgrade pip
+#
+#RUN pip install -r requirements.txt
+
 FROM python:3.10
 
-ENV PYTHONUNBUFFERED=1
+ENV PYTHONUNBUFFERED 1
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt ./
+COPY poetry.lock pyproject.toml /usr/src/app/
 
-RUN pip install --upgrade pip
+RUN pip install poetry
 
-RUN pip install -r requirements.txt
+RUN poetry install
 
 
