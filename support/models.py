@@ -1,12 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-status_message = (
-    ('Frozen', 'Frozen'),
-    ('Resolved', 'Resolved'),
-    ('Unresolved', 'Unresolved'),
-)
-
 
 class Message(models.Model):
     class StatusMessage(models.TextChoices):

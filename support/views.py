@@ -36,9 +36,6 @@ class SupportAPIViewSet(viewsets.ModelViewSet):
         send message to mail"""
         response = super(SupportAPIViewSet, self).update(request, *args, **kwargs)
         user = Message.objects.get(pk=self.kwargs.get('pk'))
-        if user.status == 'Resolved':
-            """ I changed "status" field on TextChoices, but I don't know
-            how to realize this method correctly
-            """
+        if user.status == Message.status.RESOLVED:
             send_status_message.delay(user.sender.email)
         return Response(status=201)
