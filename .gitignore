@@ -3,5 +3,9 @@ venv
 /.idea
 __pycache__
 .pytest_cache
+<<<<<<< HEAD
 /support/__pycache__
 /config/__pycache__
+=======
+/support/__pycache__
+>>>>>>> develop
