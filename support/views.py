@@ -23,7 +23,7 @@ class MessageAPIViewSet(mixins.ListModelMixin,
 
     def create(self, request, *args, **kwargs):
         super(MessageAPIViewSet, self).create(request, *args, **kwargs)
-        return HttpResponseRedirect(reverse('support-list'))
+        return HttpResponseRedirect(reverse('message-list'))
 
 
 class SupportAPIViewSet(viewsets.ModelViewSet):
